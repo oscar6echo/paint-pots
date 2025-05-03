@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        resizeObserver.observe(obj.contentWindow.document.body);
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <marimo-mode data-mode='read' hidden></marimo-mode>
+    <marimo-version data-version='0.13.4' hidden></marimo-version>
+    <marimo-user-config data-config='{"completion": {"activate_on_typing": true, "copilot": false}, "display": {"default_table_page_size": 10, "theme": "dark", "dataframes": "rich", "default_width": "medium", "cell_output": "above", "code_editor_font_size": 14}, "formatting": {"line_length": 79}, "keymap": {"preset": "default", "overrides": {}}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "reactive_tests": true, "on_cell_change": "autorun", "watcher_on_save": "lazy", "output_max_bytes": 8000000, "std_stream_max_bytes": 1000000}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "package_management": {"manager": "pip"}, "server": {"browser": "default", "follow_symlink": false}, "language_servers": {"pylsp": {"enabled": true, "enable_mypy": true, "enable_ruff": true, "enable_flake8": false, "enable_pydocstyle": false, "enable_pylint": false, "enable_pyflakes": false}}, "snippets": {"custom_paths": [], "include_default_snippets": true}}' data-overrides='{}' hidden></marimo-user-config>
+    <marimo-app-config data-config='{"width": "medium", "sql_output": "auto"}' hidden></marimo-app-config>
+    <marimo-server-token data-token='123' hidden></marimo-server-token>
+    <title>paint-pots</title>
+    <script type="module" crossorigin src="./assets/index-DZa9A1hR.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-4fhpeWoJ.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="" data-show-code="false">import%20marimo%0A%0A__generated_with%20%3D%20%220.13.4%22%0Aapp%20%3D%20marimo.App(width%3D%22medium%22)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_()%3A%0A%20%20%20%20import%20altair%20as%20alt%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20import%20polars%20as%20pl%0A%0A%20%20%20%20return%20alt%2C%20mo%2C%20pl%0A%0A%0A%40app.class_definition(hide_code%3DTrue)%0Aclass%20Container%3A%0A%20%20%20%20def%20__init__(self%2C%20vol_init%2C%20frac_init)%3A%0A%20%20%20%20%20%20%20%20self.vol%20%3D%20vol_init%0A%20%20%20%20%20%20%20%20%23%20fraction%20of%20colored%20paint%20in%20container%2C%20rest%20is%20white%0A%20%20%20%20%20%20%20%20self.frac%20%3D%20frac_init%0A%20%20%20%20%20%20%20%20self.histo_vol%20%3D%20%5B%5D%0A%20%20%20%20%20%20%20%20self.histo_frac%20%3D%20%5B%5D%0A%0A%20%20%20%20def%20snapshot(self)%3A%0A%20%20%20%20%20%20%20%20self.histo_vol.append(self.vol)%0A%20%20%20%20%20%20%20%20self.histo_frac.append(self.frac)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(pl)%3A%0A%20%20%20%20class%20State%3A%0A%20%20%20%20%20%20%20%20def%20__init__(self%2C%20vol_scoop%2C%20show%3DTrue%2C%20histo_all%3DFalse)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.left%20%3D%20Container(vol_init%3D1.0%2C%20frac_init%3D0.0)%0A%20%20%20%20%20%20%20%20%20%20%20%20self.right%20%3D%20Container(vol_init%3D1.0%2C%20frac_init%3D1.0)%0A%20%20%20%20%20%20%20%20%20%20%20%20self.vol_scoop%20%3D%20vol_scoop%0A%20%20%20%20%20%20%20%20%20%20%20%20self.show%20%3D%20show%0A%20%20%20%20%20%20%20%20%20%20%20%20self.histo_all%20%3D%20histo_all%0A%20%20%20%20%20%20%20%20%20%20%20%20self.counter%20%3D%200%0A%20%20%20%20%20%20%20%20%20%20%20%20self.snapshot()%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20self.show%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20self.display()%0A%0A%20%20%20%20%20%20%20%20def%20run(self%2C%20nb_2wy%3A%20int)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20_%20in%20range(nb_2wy)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20self.move_two_way()%0A%0A%20%20%20%20%20%20%20%20def%20move_two_way(self)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.move_one_way(direction%3D%22to_left%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20self.show%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20self.display()%0A%20%20%20%20%20%20%20%20%20%20%20%20self.move_one_way(direction%3D%22to_right%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20self.show%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20self.display()%0A%0A%20%20%20%20%20%20%20%20def%20move_one_way(self%2C%20direction)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20direction%20%3D%3D%20%22to_left%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20c_from%20%3D%20self.right%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20c_to%20%3D%20self.left%0A%20%20%20%20%20%20%20%20%20%20%20%20elif%20direction%20%3D%3D%20%22to_right%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20c_from%20%3D%20self.left%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20c_to%20%3D%20self.right%0A%20%20%20%20%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20raise%20Exception(%22UNEXPECTED%22)%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.counter%20%2B%3D%201%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20vol_to_new%20%3D%20c_to.vol%20%2B%20self.vol_scoop%0A%20%20%20%20%20%20%20%20%20%20%20%20qty_to_cur%20%3D%20c_to.vol%20*%20c_to.frac%0A%20%20%20%20%20%20%20%20%20%20%20%20qty_to_add%20%3D%20self.vol_scoop%20*%20c_from.frac%0A%20%20%20%20%20%20%20%20%20%20%20%20frac_to_new%20%3D%20(qty_to_cur%20%2B%20qty_to_add)%20%2F%20vol_to_new%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20c_to.vol%20%3D%20vol_to_new%0A%20%20%20%20%20%20%20%20%20%20%20%20c_to.frac%20%3D%20frac_to_new%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20c_from.vol%20%3D%20c_from.vol%20-%20self.vol_scoop%0A%20%20%20%20%20%20%20%20%20%20%20%20c_from.frac%20%3D%20c_from.frac%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.snapshot()%0A%0A%20%20%20%20%20%20%20%20def%20display(self)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20print(f%22state%3A%20vol_scoop%3D%7Bself.vol_scoop%7D%22%2C%20end%3D%22%20%7C%20%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20print(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20f%22volume%3A%20left%3D%7Bself.left.vol%3A.2f%7D%2C%20right%3D%7Bself.right.vol%3A.4f%7D%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20end%3D%22%20%7C%20%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%20%20%20%20print(f%22fraction%3A%20left%3D%7Bself.left.frac%3A.2f%7D%2C%20right%3D%7Bself.right.frac%3A.4f%7D%22)%0A%0A%20%20%20%20%20%20%20%20def%20display_histo(self)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20print(%22histo%20left%3A%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20print(f%22vol%3D%7Bself.left.histo_vol%7D%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20print(f%22frac%3D%7Bself.left.histo_frac%7D%22)%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20print(%22histo%20right%3A%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20print(f%22vol%20%3D%20%20%7Bself.right.histo_vol%7D%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20print(f%22frac%20%3D%20%7Bself.right.histo_frac%7D%22)%0A%0A%20%20%20%20%20%20%20%20def%20snapshot(self)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20self.counter%20%25%202%20%3D%3D%200%20or%20self.histo_all%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20self.left.snapshot()%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20self.right.snapshot()%0A%0A%20%20%20%20%20%20%20%20def%20get_df_snapshot(self)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20n_histo%20%3D%20len(self.left.histo_vol)%0A%20%20%20%20%20%20%20%20%20%20%20%20steps%20%3D%20list(range(n_histo))%0A%20%20%20%20%20%20%20%20%20%20%20%20arr_df%20%3D%20%5B%5D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20data%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22step%22%3A%20steps%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22value%22%3A%20self.left.histo_vol%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22type%22%3A%20%5B%22left_vol%22%5D%20*%20n_histo%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20dfu%20%3D%20pl.DataFrame(data%3Ddata)%0A%20%20%20%20%20%20%20%20%20%20%20%20arr_df.append(dfu)%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20data%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22step%22%3A%20steps%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22value%22%3A%20self.left.histo_frac%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22type%22%3A%20%5B%22left_frac%22%5D%20*%20n_histo%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20dfu%20%3D%20pl.DataFrame(data%3Ddata)%0A%20%20%20%20%20%20%20%20%20%20%20%20arr_df.append(dfu)%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20data%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22step%22%3A%20steps%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22value%22%3A%20self.right.histo_vol%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22type%22%3A%20%5B%22right_vol%22%5D%20*%20n_histo%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20dfu%20%3D%20pl.DataFrame(data%3Ddata)%0A%20%20%20%20%20%20%20%20%20%20%20%20arr_df.append(dfu)%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20data%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22step%22%3A%20steps%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22value%22%3A%20self.right.histo_frac%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22type%22%3A%20%5B%22right_frac%22%5D%20*%20n_histo%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20dfu%20%3D%20pl.DataFrame(data%3Ddata)%0A%20%20%20%20%20%20%20%20%20%20%20%20arr_df.append(dfu)%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20df%20%3D%20pl.concat(arr_df)%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20df%0A%0A%20%20%20%20return%20(State%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_()%3A%0A%20%20%20%20%23%20s_test%20%3D%20State(vol_cup%3D0.15%2C%20show%3DTrue%2C%20histo_all%3DTrue)%0A%20%20%20%20%23%20for%20_%20in%20range(3)%3A%0A%20%20%20%20%23%20%20%20%20%20s_test.move_two_way()%0A%20%20%20%20%23%20s_test.display_histo()%0A%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20slider_vol_scoop%20%3D%20mo.ui.slider(start%3D0.05%2C%20stop%3D0.95%2C%20step%3D0.05%2C%20value%3D0.25)%0A%20%20%20%20return%20(slider_vol_scoop%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20slider_n_step%20%3D%20mo.ui.slider(start%3D0%2C%20stop%3D20%2C%20value%3D10)%0A%20%20%20%20return%20(slider_n_step%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20toggle%20%3D%20mo.ui.checkbox(True)%0A%20%20%20%20return%20(toggle%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(State%2C%20mo%2C%20slider_n_step%2C%20slider_vol_scoop%2C%20toggle)%3A%0A%20%20%20%20s%20%3D%20State(vol_scoop%3Dslider_vol_scoop.value%2C%20show%3DFalse%2C%20histo_all%3Dtoggle.value)%0A%20%20%20%20s.run(nb_2wy%3Dslider_n_step.value)%0A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20%23%23%20How%20fast%20do%20color%20and%20white%20paints%20get%20mixed%20%3F%0A%0A%20%20%20%20%20%20%20%20%3Cimg%20src%3D%22public%2Fpaint-pots.png%22%20width%3D%22200%22%20alt%3D%22missing%20img%22%20%2F%3E%0A%20%20%20%20%20%20%20%20You%20have%20two%201-liter%20pots%3A%20the%20left%20contains%20white%20paint%2C%20the%20right%20contains%20colored%20paint.%20%20%0A%20%20%20%20%20%20%20%20Using%20a%20scoop%20of%20size%20s%20(%3C1%20liter)%2C%20you%20transfer%20s%20liters%20from%20right%20to%20left%2C%20mix%2C%20then%20transfer%20s%20liters%20back%20from%20left%20to%20right%2C%20and%20mix.%20This%20process%20is%20repeated%20multiple%20times%3B%20after%20each%20step%2C%20both%20pots%20have%201%20liter%20of%20mixed%20paint.%0A%0A%20%20%20%20%20%20%20%20volume%20of%20scoop%3A%20%7Bslider_vol_scoop%7D%20%20%0A%20%20%20%20%20%20%20%20number%20of%20steps%3A%20%7Bslider_n_step%7D%20%20%0A%20%20%20%20%20%20%20%20show%20values%20mid-step%3A%20%7Btoggle%7D%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%20(s%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(alt%2C%20df%2C%20mo)%3A%0A%20%20%20%20chart%20%3D%20(%0A%20%20%20%20%20%20%20%20alt.Chart(df)%0A%20%20%20%20%20%20%20%20.mark_line()%0A%20%20%20%20%20%20%20%20.encode(%0A%20%20%20%20%20%20%20%20%20%20%20%20x%3D%22step%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20y%3D%22value%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20color%3D%22type%22%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20)%0A%0A%20%20%20%20chart%20%3D%20mo.ui.altair_chart(chart)%0A%0A%20%20%20%20return%20(chart%2C)%0A%0A%0A%40app.cell%0Adef%20_(chart%2C%20mo)%3A%0A%20%20%20%20mo.vstack(%5Bchart%5D)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(s)%3A%0A%20%20%20%20df%20%3D%20s.get_df_snapshot()%0A%20%20%20%20%23%20df%0A%20%20%20%20return%20(df%2C)%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
